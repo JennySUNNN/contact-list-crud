@@ -1,31 +1,34 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
 import App from "./App";
-import AddContact from "./routes/AddContact";
-
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ReactDOM from "react-dom/client";
 import { Error } from "./Error";
-// BrowserRouter
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { contactLoader, allContactsLoader } from "./service/loader";
 
-import { loader } from "./componenets/ContactList";
+import AddContactForm from "./componenets/AddContactForm";
+import EditContactForm from "./componenets/EditContactForm";
+
+import deleteAction from "./componenets/Delete";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
     errorElement: <Error />,
-    loader: loader,
-    children: [
-      {
-        path: "",
-      },
-    ],
+    loader: allContactsLoader,
   },
   {
     path: "/new",
-    element: <AddContact />,
-    errorElement: <Error />,
-    // loader: loader,
+    element: <AddContactForm />,
+  },
+  {
+    path: "/contacts/:id/edit",
+    element: <EditContactForm />,
+    loader: contactLoader,
+  },
+  {
+    path: "/contacts/:id/delete",
+    element: deleteAction,
   },
 ]);
 

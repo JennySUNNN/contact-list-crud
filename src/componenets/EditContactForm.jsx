@@ -1,45 +1,48 @@
 import "../App.css";
 import { ImCross } from "react-icons/im";
-import { Link, useNavigate } from "react-router-dom";
-import { addContact } from "../service/contacts";
+import { Link, useLoaderData} from "react-router-dom";
 
-const AddContactForm = () => {
-  const navigate = useNavigate();
+// export async function action({ request, params }) {
+//   const formData = await request.formData();
+//   const updates = Object.fromEntries(formData);
+//   await updateContact(params.contactId, updates);
+//   return redirect(`/contacts/${params.contactId}`);
+// }
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const EditContactForm = () => {
+  const { contact } = useLoaderData();
 
-    // create a FormData object from the form
-    const formData = new FormData(e.target);
+  //  const navigate = useNavigate();
 
-    const newContact = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      phone: formData.get("phone"),
-      email: formData.get("email"),
-      address: formData.get("address"),
-    };
+  //  const handleSubmit = (e) => {
+  //    e.preventDefault();
 
-    addContact(newContact);
-    // TODO: Add alert when successfully submit
-    navigate("/");
-  };
+  //    // create a FormData object from the form
+  //    const formData = new FormData(e.target);
+
+  //    const newContact = {
+  //      firstName: formData.get("firstName"),
+  //      lastName: formData.get("lastName"),
+  //      phone: formData.get("phone"),
+  //      email: formData.get("email"),
+  //      address: formData.get("address"),
+  //    };
+
+  //    addContact(newContact);
+  //    // TODO: Add alert when successfully submit
+  //    navigate("/");
+  //  };
 
   return (
     <div>
       <div className="px-28 pt-14 flex justify-between items-center">
-        <h1 className="font-bold text-[30px] text-center">
-          Create New Contact
-        </h1>
+        <h1 className="font-bold text-[30px] text-center">Edit Conatct</h1>
         <Link to="/">
           <ImCross size={"20px"} />
         </Link>
       </div>
 
-      <form
-        onSubmit={handleSubmit}
-        className="mx-28 my-14"
-      >
+      <form className="mx-28 my-14">
         <div className="sm:grid gap-6 mb-6 md:grid-cols-2">
           <div>
             <label
@@ -52,6 +55,7 @@ const AddContactForm = () => {
               type="text"
               name="firstName"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              defaultValue={contact.firstName}
               required
             />
           </div>
@@ -66,6 +70,7 @@ const AddContactForm = () => {
               type="text"
               name="lastName"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              defaultValue={contact.lastName}
               required
             />
           </div>
@@ -80,6 +85,7 @@ const AddContactForm = () => {
               type="tel"
               name="phone"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              defaultValue={contact.email}
               required
             />
           </div>
@@ -94,6 +100,7 @@ const AddContactForm = () => {
               type="email"
               name="email"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              defaultValue={contact.email}
               required
             />
           </div>
@@ -108,6 +115,7 @@ const AddContactForm = () => {
               type="text"
               name="address"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              defaultValue={contact.address}
               required
             />
           </div>
@@ -126,4 +134,4 @@ const AddContactForm = () => {
   );
 };
 
-export default AddContactForm;
+export default EditContactForm;
