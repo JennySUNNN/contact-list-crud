@@ -4,7 +4,7 @@ import { Form, Link, useLoaderData, redirect } from "react-router-dom";
 import { editContact } from "../service/contacts";
 
 export async function editAction({ request, params }) {
-  const formData = await request.formData(); //
+  const formData = await request.formData(); // get data input from the form
   const updates = Object.fromEntries(formData);
   await editContact(params.id, updates);
   return redirect("/");
