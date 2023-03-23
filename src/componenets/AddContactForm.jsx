@@ -12,14 +12,8 @@ const AddContactForm = () => {
     // create a FormData object from the form
     const formData = new FormData(e.target);
 
-    const newContact = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
-      phone: formData.get("phone"),
-      email: formData.get("email"),
-      address: formData.get("address"),
-    };
-
+    const newContact = Object.fromEntries(formData)
+  
     addContact(newContact);
     // TODO: Add alert when successfully submit
     navigate("/");
