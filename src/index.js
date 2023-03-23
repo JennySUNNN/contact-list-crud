@@ -8,7 +8,7 @@ import { contactLoader, allContactsLoader } from "./service/loader";
 import AddContactForm from "./componenets/AddContactForm";
 import EditContactForm from "./componenets/EditContactForm";
 
-import deleteAction from "./componenets/Delete";
+import { editAction } from "./componenets/EditContactForm";
 
 const router = createBrowserRouter([
   {
@@ -22,13 +22,10 @@ const router = createBrowserRouter([
     element: <AddContactForm />,
   },
   {
-    path: "/contacts/:id/edit",
+    path: "/:id/edit",
     element: <EditContactForm />,
     loader: contactLoader,
-  },
-  {
-    path: "/contacts/:id/delete",
-    element: deleteAction,
+    action: editAction,
   },
 ]);
 

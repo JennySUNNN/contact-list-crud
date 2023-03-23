@@ -7,9 +7,9 @@ function App() {
   return (
     <div className="App">
       {/* Header Section */}
-
       <div className="flex items-center justify-between py-14 px-28">
         <h1 className="font-bold text-[40px]">Contacts</h1>
+
         {/* Add New Contact Button */}
         <Link
           to={"/new"}
@@ -22,7 +22,6 @@ function App() {
 
       {/* Contact List Section */}
       <ContactList />
-      
     </div>
   );
 }

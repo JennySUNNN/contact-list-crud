@@ -32,13 +32,6 @@ export const addContact = (newContact) => {
   localStorage["contacts"] = JSON.stringify(contacts);
 };
 
-// Delete: filter out the aim to be deleted contact by its id
-export const deleteContact = (id) => {
-  let contacts = getContacts();
-  contacts = contacts.filter((contact) => contact.id !== id);
-  localStorage["contacts"] = JSON.stringify(contacts);
-};
-
 // Find the contact obj by id
 export const getContactById = (id) => {
   const contacts = getContacts();
@@ -60,4 +53,11 @@ export const editContact = (id, updatedContact) => {
   // Add the updated contact obj to contacts array
   contacts.unshift(contact);
   localStorage["contacts"] = JSON.stringify(contacts);
+};
+
+// Delete: filter out the aim to be deleted contact by its id
+export const deleteContact = (contacts,id) => {
+  contacts = contacts.filter((contact) => contact.id !== id);
+  localStorage["contacts"] = JSON.stringify(contacts);
+  return contacts;
 };
