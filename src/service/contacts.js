@@ -11,6 +11,8 @@
 // Below are functions that mock the CRUD operations:
 // Using web storage API - "localStorage" to store and retrieve the contacts data
 
+import { v4 as uuidv4 } from "uuid";
+
 // Get all contacts information
 export const getContacts = () => {
   //if no 'contacts' item in localStorage, initial it with an empty array.
@@ -25,7 +27,8 @@ export const getContacts = () => {
 // Create: Add new contact object to contacts array
 export const addContact = (newContact) => {
   const contacts = getContacts();
-  contacts.push(newContact);
+  const idNewContact = { id: uuidv4(), ...newContact }; //add a unique id to new contact
+  contacts.push(idNewContact);
   localStorage["contacts"] = JSON.stringify(contacts);
 };
 
