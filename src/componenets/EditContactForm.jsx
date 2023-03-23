@@ -1,37 +1,17 @@
 import "../App.css";
 import { ImCross } from "react-icons/im";
-import { Link, useLoaderData} from "react-router-dom";
+import { Form, Link, useLoaderData, redirect } from "react-router-dom";
+import { editContact } from "../service/contacts";
 
-// export async function action({ request, params }) {
-//   const formData = await request.formData();
-//   const updates = Object.fromEntries(formData);
-//   await updateContact(params.contactId, updates);
-//   return redirect(`/contacts/${params.contactId}`);
-// }
+export async function editAction({ request, params }) {
+  const formData = await request.formData(); //
+  const updates = Object.fromEntries(formData);
+  await editContact(params.id, updates);
+  return redirect("/");
+}
 
 const EditContactForm = () => {
   const { contact } = useLoaderData();
-
-  //  const navigate = useNavigate();
-
-  //  const handleSubmit = (e) => {
-  //    e.preventDefault();
-
-  //    // create a FormData object from the form
-  //    const formData = new FormData(e.target);
-
-  //    const newContact = {
-  //      firstName: formData.get("firstName"),
-  //      lastName: formData.get("lastName"),
-  //      phone: formData.get("phone"),
-  //      email: formData.get("email"),
-  //      address: formData.get("address"),
-  //    };
-
-  //    addContact(newContact);
-  //    // TODO: Add alert when successfully submit
-  //    navigate("/");
-  //  };
 
   return (
     <div>
@@ -42,7 +22,10 @@ const EditContactForm = () => {
         </Link>
       </div>
 
-      <form className="mx-28 my-14">
+      <Form
+        method="post"
+        className="mx-28 my-14"
+      >
         <div className="sm:grid gap-6 mb-6 md:grid-cols-2">
           <div>
             <label
@@ -129,7 +112,7 @@ const EditContactForm = () => {
             Save
           </button>
         </div>
-      </form>
+      </Form>
     </div>
   );
 };

@@ -11,7 +11,7 @@
 // Below are functions that mock the CRUD operations:
 // Using web storage API - "localStorage" to store and retrieve the contacts data
 
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuidv4 } from "uuid"; //generate unique id for each contact data
 
 // Get all contacts information
 export const getContacts = () => {
@@ -49,10 +49,15 @@ export const getContactById = (id) => {
 // Edit contact with updated contact information
 export const editContact = (id, updatedContact) => {
   let contacts = getContacts();
+  let contact = contacts.find((contact) => contact.id === id);
+  if (!contact) throw new Error("No contact found!");
 
   // Delete old contact obj:
   contacts = contacts.filter((contact) => contact.id !== id);
+
+  Object.assign(contact, updatedContact);
+
   // Add the updated contact obj to contacts array
-  contacts.push(updatedContact);
+  contacts.unshift(contact);
   localStorage["contacts"] = JSON.stringify(contacts);
 };
