@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { AiFillEdit } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import { getContacts } from "../service/contacts";
@@ -7,12 +7,6 @@ import Delete from "./Delete";
 const ContactList = () => {
   //State to manage any update on the list of contacts
   const [contacts, setContacts] = useState(getContacts());
-
-  useEffect(() => {
-    if (contacts) {
-      setContacts(contacts);
-    }
-  }, []);
 
   return (
     <div className="mx-28 shadow-md sm:rounded-lg">
